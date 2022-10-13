@@ -12,3 +12,10 @@ Sausage
 Dough
 Tomato sauce
 Pickles
+
+Mediterranean pizza
+Spinach
+Chicken
+Tomato
+Feta
+White sauce
