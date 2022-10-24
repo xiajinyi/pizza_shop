@@ -36,7 +36,7 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza)
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))+
   geom_bar(stat = "identity")
 
-# Group the sales_data by pizza type and then data. Then calculate the ave_sales,
+# Group the sales_data by pizza type and then date. Then calculate the ave_sales,
 # which is the mean of the number value.
 # Average data
 sales_ave_daily <- sales_data %>%
