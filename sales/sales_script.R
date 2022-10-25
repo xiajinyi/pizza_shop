@@ -27,7 +27,8 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 
 # Daily sales
 # Create "proper" dates
-sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))  
+sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))
+# creates a new column in sales_data specifying day, year, and month within each date.
 
 # Summarize data
 sales_summary_daily <- sales_data %>% # creating summary of daily sales from sales_data
@@ -38,9 +39,16 @@ sales_summary_daily <- sales_data %>% # creating summary of daily sales from sal
 # Plot
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza))+
   geom_line()
+# line plot of specific dates and total sales. Data/color is filled in by type of pizza.
+
 
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))+
   geom_bar(stat = "identity")
+# bar chart of specific dates and total sales. Data/color is filled in by type of pizza.
+# In my opinion, this is harder to read than the preceding line plot of the same data. 
+# I played around with color and fill = with both of these plots and saw that if you fill=
+# the line plot, all lines are gray and the key with the pizzas is gone. In using color= 
+# in the bar graph, an outline of color is provided instead of a filled-in bar graph.
 
 # Average data
 sales_ave_daily <- sales_data %>%
@@ -49,3 +57,4 @@ sales_ave_daily <- sales_data %>%
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
+# bar chart of specific dates and average sales per day. Data/color is filled in by type of pizza.
