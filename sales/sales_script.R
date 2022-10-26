@@ -17,7 +17,9 @@ sales_summary <- sales_data %>% ###pipe takes the output of sales_data and
   summarize(total_sales = sum(number))    ###It calculates the sum of each pizza type in the 
                                   ###given month ( 3, grouped by above code) and puts that in the col (total sales)
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity")   ###creates the bar chart of the summary table for pizza and total sales 
+   ##with total sales as an dependent y variable provided in the ggplot function.  
+  ##otherwise Geom_bar by default will count the no.of obs based on the x-variable(pizza) grouping.
 
 # Daily sales
 # Create "proper" dates
