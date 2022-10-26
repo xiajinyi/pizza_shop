@@ -10,10 +10,12 @@ sales_data <- read.csv("sales/202003_sales.csv")
 ##### 3. Create summaries #####
 
 # Monthly sales per pizza type
-sales_summary <- sales_data %>%
-  group_by(pizza, month) %>% 
-  summarize(total_sales = sum(number))
-
+sales_summary <- sales_data %>% ###pipe takes the output of sales_data and 
+                                      ###use this output as an argument in another function
+  group_by(pizza, month) %>%   ### it groups the dataframe by given column name, 
+                                  ## Here, it will group the sales data by pizza and month
+  summarize(total_sales = sum(number))    ###It calculates the sum of each pizza type in the 
+                                  ###given month ( 3, grouped by above code) and puts that in the col (total sales)
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
   geom_bar(stat = "identity")
 
