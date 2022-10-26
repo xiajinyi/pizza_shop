@@ -21,11 +21,12 @@ sales_summary <- sales_data %>% # In this line we are assigning all the code to
   summarize(total_sales = sum(number)) # The function summarise() creates a new 
   # dataframe, it will have one (or more) rows for each combination of grouping 
   # variables. In this case, because we said sum(number), this column called 
-  # total sales will be the sum of the elements in the "number" rows for each 
+  # "total_sales" will show the sum of the elements in the "number" rows for each 
   # of the groups above. The result will allow us to see the total of each 
-  # flavor of pizza sold in which month. It is worth to note that after running 
-  # this, the console pane returns the following message: `summarise()` has 
-  # grouped output by 'pizza'. You can override using the `.groups` argument.
+  # flavor of pizza sold and which month that was sold. It is worth to note 
+  # that after running this, the console pane returns the following message: 
+  # `summarise()` has grouped output by 'pizza'. You can override using the 
+  #`.groups` argument.
   # I checked on Google and found the following about it: The reason for the 
   # message is that the dplyr package drops the last group variable that was 
   # specified in the group_by function, in case we are using multiple columns to 
