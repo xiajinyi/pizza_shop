@@ -5,11 +5,15 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
-sales_data <- read.csv("sales/202003_sales.csv")
+sales_data <- read.csv("sales/202201_sales_MedelinKant.csv")
 
 ##### 3. Create summaries #####
 
 # Monthly sales per pizza type
+# Here we are summarizing the pizza sales by summing up the total
+# sales for each pizza type by month using a pipe 
+# We use sales_data, group by pizza type and the month it was sold,
+# and sum the total number of pizza sold of each type by month sold.
 sales_summary <- sales_data %>%
   group_by(pizza, month) %>% 
   summarize(total_sales = sum(number))
@@ -40,3 +44,4 @@ sales_ave_daily <- sales_data %>%
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
+
