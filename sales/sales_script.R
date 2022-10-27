@@ -10,9 +10,9 @@ sales_data <- read.csv("sales/202003_sales.csv")
 ##### 3. Create summaries #####
 
 # Monthly sales per pizza type
-sales_summary <- sales_data %>%
+sales_summary <- sales_data %>% 
   group_by(pizza, month) %>% 
-  summarize(total_sales = sum(number))
+  summarize(total_sales = sum(number)) # summarizes the total monthly sales per pizza type
 
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
   geom_bar(stat = "identity")
@@ -24,7 +24,7 @@ sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_
 # Summarize data
 sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
-  summarize(total_sales = sum(number))
+  summarize(total_sales = sum(number)) # summarizes the number of recorded daily sales for each type of pizza
 
 # Plot
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza))+
@@ -36,7 +36,7 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
 # Average data
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
-  summarize(ave_sales = mean(number))
+  summarize(ave_sales = mean(number)) # summarizes the average daily sales for each type of pizza
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
