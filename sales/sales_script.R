@@ -19,8 +19,7 @@ sales_summary <- sales_data %>%
 
 #This code groups the sales data by pizza and then month and sums the sales of each order type.
 
-ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
-  geom_bar(stat = "identity")
+ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+ geom_bar(stat = "identity")
 
 # Daily sales
 # Create "proper" dates
