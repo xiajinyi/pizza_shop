@@ -46,6 +46,7 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(ave_sales = mean(number))
+###Groups the sales by pizza type and date
 ### Calculates the mean of the number of each sales in the column ave_sales.
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
