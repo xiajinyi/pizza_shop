@@ -5,6 +5,7 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
+
 # create new sales data and export to sales folder
 day <- rep(1, length.out = 20)
 month <- rep(12, length.out = 20)
@@ -14,7 +15,6 @@ number <- sample(1:5, 20, replace = T)
 date <- ymd(paste(year,month,day, sep = "-"))
 
 new_sales_data <- data.frame(day, month, year, pizza, number, date)
-
 #write.csv(new_sales_data, "sales/202212_sales_CAYETANO.csv")
 
 sales_data <- read.csv("sales/202003_sales.csv")
