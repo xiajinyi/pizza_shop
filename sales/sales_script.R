@@ -3,18 +3,21 @@
 ##### 1. Load packages #######
 library(tidyverse)
 library(lubridate)
+library(magrittr)
 
 ##### 2. Load data #######
 library(readr)
-
 sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202003_sales.csv")
 
+my_sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202210_sales_Trotman.csv")
 ##### 3. Create summaries #####
 
 # Monthly sales per pizza type
 sales_summary <- sales_data %>%
   group_by(pizza, month) %>% 
-  summarize(total_sales = sum(number))
+  summarize(total_sales = sum(number), .groups = "keep")
+
+#This code groups the sales data by pizza and then month and sums the sales of each order type.
 
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
   geom_bar(stat = "identity")
@@ -28,6 +31,7 @@ sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(total_sales = sum(number))
 
+#This code creates a new df that groups by pizza type and then by date. This tells you how much of each pizza was bought on a specific day.
 # Plot
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza))+
   geom_line()
