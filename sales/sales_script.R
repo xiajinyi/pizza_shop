@@ -5,7 +5,9 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
-sales_data <- read.csv("sales/202003_sales.csv")
+library(readr)
+
+sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202003_sales.csv")
 
 ##### 3. Create summaries #####
 
