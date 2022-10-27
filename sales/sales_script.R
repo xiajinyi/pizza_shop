@@ -5,13 +5,13 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
-sales_data <- read.csv("sales/202003_sales.csv")
+sales_data <- read.csv("sales/202204_sales_AnaCubasBaez.csv")
 
 ##### 3. Create summaries #####
 
 # Monthly sales per pizza type
 sales_summary <- sales_data %>% 
-  group_by(pizza, month) %>% 
+  group_by(pizza, month) %>% # does not create anything, only categorical data
   summarize(total_sales = sum(number)) # summarizes the total monthly sales per pizza type
 
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
