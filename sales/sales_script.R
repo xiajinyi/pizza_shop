@@ -30,6 +30,11 @@ sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(total_sales = sum(number))
 
+###1st line; pipes the sales data and stores in variable sales_summary_daily
+###2nd line: groups the sale of pizza type  by date
+##Calculates the total number of sales of pizza each day 
+
+
 # Plot
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza))+
   geom_line()
@@ -41,6 +46,7 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(ave_sales = mean(number))
+### Calculates the mean of the number of each sales in the column ave_sales.
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
