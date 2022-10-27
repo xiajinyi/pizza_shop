@@ -28,6 +28,12 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))  
 
 # Summarize data
+# Here we are again using a pipe to summarize the total sales for each pizza type but this
+# time by date instead of month.
+# First line tells us to use sales_data in our pipe and to create object sales_summary_daily
+# Second line groups our data by pizza and then by our new date vector
+# Third line summarizes the daily sales by summing the total sales for each pizza type for each 
+# day it was sold and creates new column called total_sales in our df
 sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(total_sales = sum(number))
@@ -40,6 +46,12 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
   geom_bar(stat = "identity")
 
 # Average data
+# Here we are using a pipe to average the sales by pizza and date instead of calculating 
+# a total 
+# First line tells us to use sales_data in our pipe and to creat sales_ave_daily object
+# Second line tells us to group first by pizza type and then date vector. 
+# Thrid line tells us to summarize data by calculating the mean number of pizzas sold for 
+# each groupsand create a column called ave_sales.  
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(ave_sales = mean(number))
