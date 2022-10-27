@@ -23,6 +23,8 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 
 # Daily sales
 # Create "proper" dates
+# Here we are combining the year, month, and day columns into one date vector
+# with the proper data type of date instead of integer and saving over our old data object
 sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))  
 
 # Summarize data
