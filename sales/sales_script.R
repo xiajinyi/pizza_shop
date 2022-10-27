@@ -5,7 +5,7 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
-sales_data <- read.csv("sales/202003_sales.csv")
+sales_data <- read.csv("sales/202210_sales_Shubekshya.csv")
 
 ##### 3. Create summaries #####
 
@@ -51,3 +51,4 @@ sales_ave_daily <- sales_data %>%
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
+
