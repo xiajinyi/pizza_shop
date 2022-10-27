@@ -42,7 +42,9 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
 # Average data
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
-  summarize(ave_sales = mean(number))
+  summarize(ave_sales = mean(number), .groups = "keep")
+
+#This code again groups the sales data by pizza and date then summarizes the sales of these grouping by averaging the sales numbers. This way you can see how sales of each pizza type change on average across days. 
 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
