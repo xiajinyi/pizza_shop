@@ -5,6 +5,7 @@ library(tidyverse)
 library(lubridate)
 
 ##### 2. Load data #######
+
 sales_data <- read.csv("sales/202003_sales.csv")
 
 ##### 3. Create summaries #####
@@ -75,6 +76,12 @@ sales_summary <- sales_data %>%
   # column, total_sales, that sums all the data in the number column that 
   # corrresponds to the grouped data of pizza/month.
 
+# Monthly sales per pizza type
+# Ana's addition:
+sales_summary <- sales_data %>% 
+  group_by(pizza, month) %>% # does not create anything, only categorical data
+  summarize(total_sales = sum(number)) # summarizes the total monthly sales per pizza type
+
 sales_summary <- sales_data %>%
   group_by(pizza, month) %>% 
   summarize(total_sales = sum(number))
@@ -91,6 +98,12 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 # Daily sales
 # Create "proper" dates
 sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))  
+
+# Ana's addition:
+# Summarize data
+sales_summary_daily <- sales_data %>%
+  group_by(pizza, date) %>% 
+  summarize(total_sales = sum(number)) # summarizes the number of recorded daily sales for each type of pizza
 
 # Monique's additions
 # Here, it was also created a nested function very similar with the one above 
@@ -165,6 +178,11 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza)
 
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))+
   geom_bar(stat = "identity")
+
+# Ana's addition:
+sales_ave_daily <- sales_data %>%
+  group_by(pizza, date) %>% 
+  summarize(ave_sales = mean(number)) # summarizes the average daily sales for each type of pizza
 
 # Monique's additions
 # Here, it was created another nested function, where sales_data was used again,
