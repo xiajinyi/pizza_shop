@@ -31,6 +31,12 @@ new_sales_data <- data.frame(day, month, year, pizza, number, date)
 #write.csv(new_sales_data, "sales/202212_sales_CAYETANO.csv")
 
 ##### 3. Create summaries #####
+# Medelin's addition:
+# Here we are summarizing the pizza sales by summing up the total
+# sales for each pizza type by month using a pipe 
+# We use sales_data, group by pizza type and the month it was sold,
+# and sum the total number of pizza sold of each type by month sold.
+
 # Denver's addition:
 sales_summary <- sales_data %>%
   group_by(pizza, month) %>% # groups data by pizza and month columns
@@ -145,6 +151,18 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 
 # Daily sales
 # Create "proper" dates
+
+# Medelin's addition:
+# Here we are combining the year, month, and day columns into one date vector
+# with the proper data type of date instead of integer and saving over our old data object
+
+# Medelin's addition:
+# Here we are again using a pipe to summarize the total sales for each pizza type but this
+# time by date instead of month.
+# First line tells us to use sales_data in our pipe and to create object sales_summary_daily
+# Second line groups our data by pizza and then by our new date vector
+# Third line summarizes the daily sales by summing the total sales for each pizza type for each 
+# day it was sold and creates new column called total_sales in our df
 
 # Emma's addition:
 ## This code uses lubridate to transform the day/month/year columns into a date 
@@ -328,6 +346,14 @@ sales_ave_daily <- sales_data %>%
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(ave_sales = mean(number))
+
+# Medelin's addition:
+# Here we are using a pipe to average the sales by pizza and date instead of calculating 
+# a total 
+# First line tells us to use sales_data in our pipe and to creat sales_ave_daily object
+# Second line tells us to group first by pizza type and then date vector. 
+# Thrid line tells us to summarize data by calculating the mean number of pizzas sold for 
+# each groupsand create a column called ave_sales. 
 
 # Monique's addition:
 # It gives a bar plot with the results from the nested functions above.
