@@ -15,6 +15,7 @@ library(readr)
 
 ##### 2. Load data #######
 sales_data <- read.csv("sales/202003_sales.csv")
+
 # Eric's addition:
 sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202003_sales.csv")
 my_sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202210_sales_Trotman.csv")
@@ -115,6 +116,13 @@ sales_summary <- sales_data %>%
   # corrresponds to the grouped data of pizza/month.
 
 # Monthly sales per pizza type
+# Cloe's additions:
+sales_summary <- sales_data %>% # calls data from sales_data to create new
+  group_by(pizza, month) %>%  # groups pizza by month (ties each data point of pizza to the 
+                              # month it was purchased in)
+  summarize(total_sales = sum(number)) # creates total_sales as y-axis and input is the sum
+                                      # of the number of pizza sold
+                                      
 # Ana's addition:
 sales_summary <- sales_data %>% 
   group_by(pizza, month) %>% # does not create anything, only categorical data
@@ -123,6 +131,7 @@ sales_summary <- sales_data %>%
 sales_summary <- sales_data %>%
   group_by(pizza, month) %>% 
   summarize(total_sales = sum(number))
+
 
 # Monique's additions:
 # Here we are using ggplot to make a bar plot of sales_summary, where the x axis
@@ -148,9 +157,14 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
   geom_bar(stat = "identity")
+# makes x-axis pizza (which is now grouped by month) and y-axis total sales 
+# (total sum of the number of types of pizza for that month)
 
 # Daily sales
 # Create "proper" dates
+sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))
+# Cloe's addition:
+# creates a new column in sales_data specifying day, year, and month within each date.
 
 # Medelin's addition:
 # Here we are combining the year, month, and day columns into one date vector
@@ -181,6 +195,14 @@ sales_summary_daily <- sales_data %>%
 
 #Denver's addition:  
 # Summarize data
+
+# Cloe's addition:
+sales_summary_daily <- sales_data %>% # creating summary of daily sales from sales_data
+  group_by(pizza, date) %>% # grouping pizza by date 
+  summarize(total_sales = sum(number)) # creates total_sales as y-axis and input is the sum
+                                      # of the number of pizza sold
+
+# Medelin?
 sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(total_sales = sum(number)) # summarizes the number of recorded daily sales for each type of pizza
@@ -266,12 +288,19 @@ sales_summary_daily <- sales_data %>%
 # Plot
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza))+
   geom_line()
+# line plot of specific dates and total sales. Data/color is filled in by type of pizza.
+
 
 # Emma's addition:
 ## This is the same information as the previous graph, except communicated in a 
 ## bar graph. 
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))+
   geom_bar(stat = "identity")
+# bar chart of specific dates and total sales. Data/color is filled in by type of pizza.
+# In my opinion, this is harder to read than the preceding line plot of the same data. 
+# I played around with color and fill = with both of these plots and saw that if you fill=
+# the line plot, all lines are gray and the key with the pizzas is gone. In using color= 
+# in the bar graph, an outline of color is provided instead of a filled-in bar graph.
 
 # Shubeksya's addition:
 #Bar graph of pizza sales by type foe each day in March 2020. Pizza type is stacked 
@@ -363,6 +392,9 @@ sales_ave_daily <- sales_data %>%
 # margheritta seems to be one of the most promising ones, especially on mar 09. 
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
   geom_bar(stat = "identity", position = "dodge")
+
+# Cloe's addition:
+# bar chart of specific dates and average sales per day. Data/color is filled in by type of pizza.
 
 # Jason?
 ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
