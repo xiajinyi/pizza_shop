@@ -137,6 +137,9 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
    ##with total sales as an dependent y variable provided in the ggplot function.  
   ##otherwise Geom_bar by default will count the no.of obs based on the x-variable(pizza) grouping.
 
+# Ashlynn's addition:
+#Bar graph of total pizza sales (by type) for March 2020
+
 ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
   geom_bar(stat = "identity")
 
@@ -232,7 +235,13 @@ sales_summary_daily <- sales_data %>%
 # consumed on march 11.
 # on the bar plot, it is easier to visualize and identify the consumption 
 # of each type of  pizza per day, given here by color. 
-#  
+
+# Shubeksya's addition:
+###Groups the sales by pizza type and date
+### Calculates the mean of the number of each sales in the column ave_sales.
+
+# Ashlynn's addition:
+# Line graph of total sales for each type of pizza on each day in March 2020
 
 # Emma's addition:
 ## This is a line graph plots the number of each pizza type sold throughout March 
@@ -247,8 +256,7 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))
   geom_bar(stat = "identity")
 
 # Shubeksya's addition:
-###Groups the sales by pizza type and date
-### Calculates the mean of the number of each sales in the column ave_sales.
+#Bar graph of pizza sales by type foe each day in March 2020. Pizza type is stacked 
 
 # Denver's addition:
 # Average data
@@ -339,3 +347,8 @@ ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
 # which then dips down afterwards.
 # Emma's addition:
 ## This plots the average number of each pizza type sold each day. 
+
+# Shubeksya's addition:
+#Bar graph of the average daily sales for each pizza type for each day in March 2020
+#This data is not stacked, but I am also not sure if this is 
+#useful because wouldn't you want to know the total sales for a day rather than the average?
