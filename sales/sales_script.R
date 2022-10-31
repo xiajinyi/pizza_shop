@@ -18,8 +18,11 @@ for (salesdata in all_sales){
 ############## JOIN ###############
 # Use a tidyverse join to join all the data together into one file
 # called sales_data, then run the rest of the code
-
-
+sales_data <- dataset_1
+for (i in 2:length(all_sales)){
+  newdata <- get(paste("dataset_", i, sep=""))
+  sales_data <- full_join(sales_data, newdata)
+}
 
 ########################################
 
