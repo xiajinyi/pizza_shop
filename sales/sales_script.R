@@ -19,6 +19,8 @@ for (salesdata in all_sales){
 # Use a tidyverse join to join all the data together into one file
 # called sales_data, then run the rest of the code
 
+
+
 ########################################
 
 ##### 3. Create summaries #####
