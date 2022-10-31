@@ -1,5 +1,8 @@
 # Pizza sales
 
+# Denver's addition:
+rm(list = ls())
+
 ##### 1. Load packages #######
 library(tidyverse)
 library(lubridate)
@@ -15,8 +18,24 @@ sales_data <- read.csv("sales/202003_sales.csv")
 # Eric's addition:
 sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202003_sales.csv")
 my_sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202210_sales_Trotman.csv")
+# Denver's addition:
+# create new sales data and export to sales folder
+day <- rep(1, length.out = 20)
+month <- rep(12, length.out = 20)
+year <- rep(2022, length.out = 20)
+pizza <- rep(c("margherita","hawaiian","meat lovers","vegetarian","four cheese"),length.out = 20)
+number <- sample(1:5, 20, replace = T)
+date <- ymd(paste(year,month,day, sep = "-"))
+
+new_sales_data <- data.frame(day, month, year, pizza, number, date)
+#write.csv(new_sales_data, "sales/202212_sales_CAYETANO.csv")
 
 ##### 3. Create summaries #####
+# Denver's addition:
+sales_summary <- sales_data %>%
+  group_by(pizza, month) %>% # groups data by pizza and month columns
+  summarize(total_sales = sum(number)) # Sums number of sales per pizza type per month
+  
 # Eric's additions:
 #This code groups the sales data by pizza and then month and sums the sales of each order type.
 
@@ -117,6 +136,11 @@ ggplot(data = sales_summary, aes(x = pizza, y = total_sales))+
 sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_data$day))  
 
 # Ana's addition:
+sales_summary_daily <- sales_data %>%
+  group_by(pizza, date) %>% # groups by pizza and date columns
+  summarize(total_sales = sum(number)) # Sums number of sales per pizza type per date
+
+#Denver's addition:  
 # Summarize data
 sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
@@ -204,6 +228,12 @@ ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, color = pizza)
 ggplot(data = sales_summary_daily, aes(x = date, y = total_sales, fill = pizza))+
   geom_bar(stat = "identity")
 
+# Denver's addition:
+# Average data
+sales_ave_daily <- sales_data %>%
+  group_by(pizza, date) %>% # groups by pizza and date columns
+  summarize(ave_sales = mean(number)) # Averages number of sales per pizza type per date
+  
 # Ana's addition:
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
@@ -262,7 +292,6 @@ sales_ave_daily2 <- sales_data %>% # Once again, this is similar to what was don
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(ave_sales = mean(number), .groups = "keep")
-
 #This code again groups the sales data by pizza and date then summarizes the sales of these grouping by averaging the sales numbers. This way you can see how sales of each pizza type change on average across days. 
 
 # Average data
@@ -288,4 +317,3 @@ ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
 # which then dips down afterwards.
 # Emma's addition:
 ## This plots the average number of each pizza type sold each day. 
-
