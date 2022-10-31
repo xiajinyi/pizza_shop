@@ -6,11 +6,20 @@ library(lubridate)
 # Emma's addition:
 library(dplyr)
 library(ggplot2)
+# Eric's addition:
+library(magrittr)
+library(readr)
 
 ##### 2. Load data #######
 sales_data <- read.csv("sales/202003_sales.csv")
+# Eric's addition:
+sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202003_sales.csv")
+my_sales_data <- read.csv("~/Desktop/EricTrot_AnimalBehav/pizza_shop/sales/202210_sales_Trotman.csv")
 
 ##### 3. Create summaries #####
+# Eric's additions:
+#This code groups the sales data by pizza and then month and sums the sales of each order type.
+
 # Emma's addition:
 ## This summary shows the amount of pizzas of each pizza type was sold in March.
 
@@ -112,6 +121,9 @@ sales_data$date <- ymd(paste(sales_data$year, "/", sales_data$month, "/", sales_
 sales_summary_daily <- sales_data %>%
   group_by(pizza, date) %>% 
   summarize(total_sales = sum(number)) # summarizes the number of recorded daily sales for each type of pizza
+
+# Eric's addition
+#This code creates a new df that groups by pizza type and then by date. This tells you how much of each pizza was bought on a specific day.
 
 # Monique's additions
 # Here, it was also created a nested function very similar with the one above 
@@ -244,7 +256,15 @@ sales_ave_daily2 <- sales_data %>% # Once again, this is similar to what was don
   # different amount of pizzas sold (number column), so the mean here is the 
   # average of the pizzas sold on that day. This is taking all the repetitive 
   # dates, and making an average from that. 
-  
+
+# Eric's addition
+# Average data
+sales_ave_daily <- sales_data %>%
+  group_by(pizza, date) %>% 
+  summarize(ave_sales = mean(number), .groups = "keep")
+
+#This code again groups the sales data by pizza and date then summarizes the sales of these grouping by averaging the sales numbers. This way you can see how sales of each pizza type change on average across days. 
+
 # Average data
 sales_ave_daily <- sales_data %>%
   group_by(pizza, date) %>% 
@@ -268,3 +288,4 @@ ggplot(data = sales_ave_daily, aes(x = date, y = ave_sales, fill = pizza))+
 # which then dips down afterwards.
 # Emma's addition:
 ## This plots the average number of each pizza type sold each day. 
+
